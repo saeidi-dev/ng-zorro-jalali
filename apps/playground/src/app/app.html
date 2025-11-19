@@ -1,2 +1,339 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+<div class="demo-grid">
+  <!-- Card 1 -->
+  <nz-card nzTitle="Basic" class="demo-card">
+    <p class="demo-desc">Basic use case. Users can select a date.</p>
+
+    <nz-date-picker
+      [(ngModel)]="date"
+      (ngModelChange)="onChange($event)"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="week"
+      [(ngModel)]="date"
+      (ngModelChange)="getWeek($event)"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="month"
+      [(ngModel)]="date"
+      (ngModelChange)="onChange($event)"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="quarter"
+      [(ngModel)]="date"
+      (ngModelChange)="onChange($event)"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="year"
+      [(ngModel)]="date"
+      (ngModelChange)="onChange($event)"
+    ></nz-date-picker>
+    <br />
+  </nz-card>
+
+  <!-- Card 2 -->
+  <nz-card nzTitle="Range Picker" class="demo-card">
+    <p class="demo-desc">Range selection with optional time.</p>
+
+    <nz-range-picker
+      [(ngModel)]="dateRange"
+      (ngModelChange)="onChange($event)"
+    ></nz-range-picker>
+    <br />
+    <nz-range-picker
+      [nzShowTime]="true"
+      [(ngModel)]="dateRange"
+      (ngModelChange)="onChange($event)"
+    ></nz-range-picker>
+    <br />
+    <nz-range-picker
+      nzMode="week"
+      [(ngModel)]="dateRange"
+      (ngModelChange)="getWeek($event)"
+    ></nz-range-picker>
+    <br />
+    <nz-range-picker
+      nzMode="month"
+      [(ngModel)]="dateRange"
+      (ngModelChange)="onChange($event)"
+    ></nz-range-picker>
+    <br />
+    <nz-range-picker
+      nzMode="quarter"
+      [(ngModel)]="dateRange"
+      (ngModelChange)="onChange($event)"
+    ></nz-range-picker>
+    <br />
+    <nz-range-picker
+      nzMode="year"
+      [(ngModel)]="dateRange"
+      (ngModelChange)="onChange($event)"
+    ></nz-range-picker>
+  </nz-card>
+
+  <!-- Card 3 -->
+  <nz-card nzTitle="Switchable picker" class="demo-card">
+    <p class="demo-desc">Switch in different types of pickers by Select.</p>
+
+    <nz-space>
+      <nz-select *nzSpaceItem [(ngModel)]="mode">
+        <nz-option nzValue="date" nzLabel="Date"></nz-option>
+        <nz-option nzValue="week" nzLabel="Week"></nz-option>
+        <nz-option nzValue="month" nzLabel="Month"></nz-option>
+        <nz-option nzValue="quarter" nzLabel="Quarter"></nz-option>
+        <nz-option nzValue="year" nzLabel="Year"></nz-option>
+      </nz-select>
+      <nz-date-picker *nzSpaceItem [nzMode]="mode"></nz-date-picker>
+    </nz-space>
+  </nz-card>
+
+  <!-- Card 4 -->
+  <nz-card nzTitle="Date Format" class="demo-card">
+    <p class="demo-desc">We can set the date format by nzFormat.</p>
+
+    <nz-date-picker [nzFormat]="dateFormat"></nz-date-picker>
+    <br />
+    <nz-date-picker nzMode="month" [nzFormat]="monthFormat"></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="quarter"
+      [nzFormat]="quarterFormat"
+    ></nz-date-picker>
+    <br />
+    <nz-range-picker [nzFormat]="dateFormat"></nz-range-picker>
+  </nz-card>
+
+  <!-- Card 5 -->
+  <nz-card nzTitle="Three Sizes" class="demo-card">
+    <p class="demo-desc">
+      The input box comes in three sizes. default will be used if nzSize is
+      omitted.
+    </p>
+
+    <nz-radio-group [(ngModel)]="size">
+      <label nz-radio-button nzValue="large">large</label>
+      <label nz-radio-button nzValue="default">default</label>
+      <label nz-radio-button nzValue="small">small</label>
+    </nz-radio-group>
+    <br />
+    <br />
+    <nz-date-picker [nzSize]="size"></nz-date-picker>
+    <br />
+    <nz-date-picker nzMode="week" [nzSize]="size"></nz-date-picker>
+    <br />
+    <nz-date-picker nzMode="month" [nzSize]="size"></nz-date-picker>
+    <br />
+    <nz-date-picker nzMode="quarter" [nzSize]="size"></nz-date-picker>
+    <br />
+    <nz-range-picker [nzSize]="size"></nz-range-picker>
+  </nz-card>
+
+  <!-- Card 6 -->
+  <nz-card nzTitle="Choose Time" class="demo-card">
+    <p class="demo-desc">
+      This property provide an additional time selection. When nzShowTime is an
+      Object, its properties will be passed on to built-in TimePicker.
+    </p>
+
+    <nz-date-picker
+      nzShowTime
+      nzFormat="yyyy-MM-DD HH:mm:ss"
+      ngModel
+      (ngModelChange)="onChange($event)"
+      (nzOnOk)="onOk($event)"
+    ></nz-date-picker>
+    <br />
+    <nz-range-picker
+      [nzShowTime]="{ nzFormat: 'HH:mm' }"
+      nzFormat="yyyy-MM-DD HH:mm"
+      ngModel
+      (ngModelChange)="onChange($event)"
+      (nzOnCalendarChange)="onCalendarChange($event)"
+      (nzOnOk)="onOk($event)"
+    ></nz-range-picker>
+  </nz-card>
+
+  <!-- Card 7 -->
+  <nz-card nzTitle="Disabled" class="demo-card">
+    <p class="demo-desc">Disabled date pickers.</p>
+
+    <nz-date-picker nzDisabled></nz-date-picker>
+    <br />
+    <nz-date-picker nzMode="month" nzDisabled></nz-date-picker>
+    <br />
+    <nz-range-picker nzDisabled></nz-range-picker>
+  </nz-card>
+
+  <!-- Card 8 -->
+  <nz-card nzTitle="Disabled Date & Time" class="demo-card">
+    <p class="demo-desc">
+      Disabled part of dates and time by nzDisabledDate and nzDisabledTime
+      respectively.
+    </p>
+
+    <nz-date-picker
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      [nzDisabledDate]="disabledDate"
+      [nzDisabledTime]="disabledDateTime"
+      [nzShowTime]="{ nzDefaultOpenValue: timeDefaultValue }"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="month"
+      [nzDisabledDate]="disabledDate"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="quarter"
+      [nzDisabledDate]="disabledDate"
+    ></nz-date-picker>
+    <br />
+    <nz-date-picker
+      nzMode="year"
+      [nzDisabledDate]="disabledDate"
+    ></nz-date-picker>
+    <br />
+    <nz-range-picker
+      [nzDisabledDate]="disabledDate"
+      [nzDisabledTime]="disabledRangeTime"
+      [nzShowTime]="{
+        nzHideDisabledOptions: true,
+        nzDefaultOpenValue: timeDefaultValue
+      }"
+      nzFormat="yyyy-MM-DD HH:mm:ss"
+    ></nz-range-picker>
+  </nz-card>
+
+  <!-- Card 9 -->
+  <nz-card nzTitle="Extra Footer" class="demo-card">
+    <p class="demo-desc">
+      Render extra footer in panel for customized requirements.
+    </p>
+
+    <nz-date-picker [nzRenderExtraFooter]="footerRender"></nz-date-picker>
+    <br />
+    <nz-date-picker
+      [nzRenderExtraFooter]="plainFooter"
+      nzShowTime
+    ></nz-date-picker>
+    <nz-range-picker [nzRenderExtraFooter]="footerRender"></nz-range-picker>
+    <nz-range-picker
+      [nzRenderExtraFooter]="plainFooter"
+      nzShowTime
+    ></nz-range-picker>
+    <nz-date-picker
+      nzMode="month"
+      [nzRenderExtraFooter]="footerRender"
+    ></nz-date-picker>
+  </nz-card>
+
+  <!-- Card 9 -->
+  <nz-card nzTitle="Inline mode" class="demo-card">
+    <p class="demo-desc">We can set the inline mode by nzInline.</p>
+
+    <nz-tabs>
+      <nz-tab nzTitle="Default">
+        <nz-date-picker
+          nzInline
+          [(ngModel)]="date"
+          (ngModelChange)="onChange($event)"
+        ></nz-date-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Week">
+        <nz-date-picker
+          nzInline
+          nzMode="week"
+          [(ngModel)]="date"
+          (ngModelChange)="getWeek($event)"
+        ></nz-date-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Month">
+        <nz-date-picker
+          nzInline
+          nzMode="month"
+          [(ngModel)]="date"
+          (ngModelChange)="onChange($event)"
+        ></nz-date-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Quarter">
+        <nz-date-picker
+          nzInline
+          nzMode="quarter"
+          [(ngModel)]="date"
+          (ngModelChange)="onChange($event)"
+        ></nz-date-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Year">
+        <nz-date-picker
+          nzInline
+          nzMode="year"
+          [(ngModel)]="date"
+          (ngModelChange)="onChange($event)"
+        ></nz-date-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Range">
+        <nz-range-picker
+          nzInline
+          [(ngModel)]="rangeDate"
+          (ngModelChange)="onChange($event)"
+        ></nz-range-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Range Time">
+        <nz-range-picker
+          nzInline
+          nzShowTime
+          [(ngModel)]="rangeDate"
+          (ngModelChange)="onChange($event)"
+        ></nz-range-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Range Week">
+        <nz-range-picker
+          nzInline
+          nzMode="week"
+          [(ngModel)]="rangeDate"
+          (ngModelChange)="onChange($event)"
+        ></nz-range-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Range Month">
+        <nz-range-picker
+          nzInline
+          nzMode="month"
+          [(ngModel)]="rangeDate"
+          (ngModelChange)="onChange($event)"
+        ></nz-range-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Range Quarter">
+        <nz-range-picker
+          nzInline
+          nzMode="quarter"
+          [(ngModel)]="rangeDate"
+          (ngModelChange)="onChange($event)"
+        ></nz-range-picker>
+      </nz-tab>
+      <nz-tab nzTitle="Range Year">
+        <nz-range-picker
+          nzInline
+          nzMode="year"
+          [(ngModel)]="rangeDate"
+          (ngModelChange)="onChange($event)"
+        ></nz-range-picker>
+      </nz-tab>
+    </nz-tabs>
+  </nz-card>
+
+  <!-- Card 10 -->
+  <nz-card nzTitle="Extra Footer" class="demo-card">
+    <p class="demo-desc">
+      A basic calendar component with Year/Month switch.
+    </p>
+
+    <nz-calendar
+      [(ngModel)]="dateCalendar"
+      [(nzMode)]="modeCalendar"
+      (nzPanelChange)="panelChange($event)"
+    ></nz-calendar>
+  </nz-card>
+</div>

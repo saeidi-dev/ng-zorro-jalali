@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "ng-zorro-jalali": ["libs/ng-zorro-jalali/src/index.ts"],
+      "ng-zorro-jalali/core": ["libs/ng-zorro-jalali/core/src/index.ts"],
+      "ng-zorro-jalali/i18n": ["libs/ng-zorro-jalali/i18n/src/index.ts"],
+      "ng-zorro-jalali/date-picker": ["libs/ng-zorro-jalali/date-picker/src/index.ts"],
+      "ng-zorro-jalali/calendar": ["libs/ng-zorro-jalali/calendar/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

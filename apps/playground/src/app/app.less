@@ -1,0 +1,33 @@
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding: 24px;
+}
+
+.demo-card {
+  border-radius: 12px;
+
+  ::ng-deep {
+    .ant-card-head-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .ant-card-body {
+      padding: 20px;
+    }
+  }
+}
+
+.demo-desc {
+  margin-bottom: 16px;
+  color: #6b6b6b;
+}
+
+nz-date-picker {
+  margin: 0 8px 12px 0;
+}
+
+nz-range-picker {
+  margin: 0 8px 12px 0;
+}
