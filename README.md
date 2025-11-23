@@ -1,82 +1,244 @@
-# NgZorroJalali
+<p align="center">
+  <a href="https://ng.ant.design">
+    <img alt="logo" width="230" src="https://img.alicdn.com/tfs/TB1TFFaHAvoK1RjSZFwXXciCFXa-106-120.svg">
+  </a>
+</p>
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
-
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
-
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-## Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/KMd3OWVZS2)
+<h1 align="center">
+ng-zorro-jalali
+</h1>
 
 
-## Run tasks
+A library that adds Jalali (Persian) calendar support to `ng-zorro-antd` date components in Angular apps. It provides a pluggable date adapter, Persian i18n, and customizable date formats for a seamless Persian user experience.
 
-To run the dev server for your app, use:
+---
 
-```sh
+### Table of Contents
+
+1. [Features](#features)
+2. [Prerequisites & Compatibility](#prerequisites--compatibility)
+3. [Installation](#installation)
+4. [Quick Start](#quick-start)
+5. [Date & i18n Configuration](#date--i18n-configuration)
+6. [Usage Examples](#usage-examples)
+    - Single DatePicker
+    - RangePicker
+    - Calendar
+    - Reactive Forms
+    - Disabling Dates
+7. [API & Tokens](#api--tokens)
+8. [Tips & Common Pitfalls](#tips--common-pitfalls)
+9. [Development & Contribution](#development--contribution)
+10. [Changelog](#changelog)
+11. [License](#license)
+
+---
+
+### Features
+
+- Full Jalali (Persian) calendar support in `ng-zorro-antd` date components
+- Switchable date adapter (defaults to `date-fns`, optional `jalali-moment` adapter)
+- Integrated with Angular i18n and locale (provides `fa_IR` for Zorro and `fa` for Angular)
+- Fully customizable display formats via `NZ_DATE_CONFIG`
+- Works with both Reactive and Template-driven Forms
+- Modular, maintainable design
+
+---
+
+### Prerequisites & Compatibility
+
+- Angular: 20.x
+- ng-zorro-antd: 20.x
+- Node: 18+ recommended
+
+Note: This library uses `date-fns` by default. If you prefer a custom adapter like `jalali-moment`, install it yourself and provide it in `providers`.
+
+---
+
+### Installation
+
+Install with npm or yarn:
+
+```bash
+# Install the library and recommended peer deps
+npm i ng-zorro-jalali jalali-moment
+# or
+yarn add ng-zorro-jalali jalali-moment
+```
+
+If your project doesn’t already use `ng-zorro-antd`, add it first.
+
+---
+
+### Quick Start
+
+For Standalone apps (Angular 16+), add the providers in `app.config.ts`:
+
+```ts
+import { ApplicationConfig, LOCALE_ID } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideNzI18n } from 'ng-zorro-antd/i18n';
+import { NzDateAdapter } from 'ng-zorro-jalali/core';
+import { NZ_DATE_CONFIG, NZ_DATE_LOCALE, fa_IR } from 'ng-zorro-jalali/i18n';
+import { faIR } from 'date-fns/locale';
+import { registerLocaleData } from '@angular/common';
+import fa from '@angular/common/locales/fa';
+
+// Run once
+registerLocaleData(fa);
+
+// Optional: use a custom adapter (e.g., jalali-moment)
+import { JalaliMomentDateAdapter } from './nz-jalali-moment.adapter';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAnimations(),
+    provideNzI18n(fa_IR),              // Persian i18n for ng-zorro
+    { provide: LOCALE_ID, useValue: 'fa' },
+    { provide: NZ_DATE_LOCALE, useValue: faIR }, // locale for date-fns
+
+    // The library defaults to a date-fns-based adapter.
+    // To switch to jalali-moment, uncomment the following line:
+    { provide: NzDateAdapter, useClass: JalaliMomentDateAdapter },
+
+    // Display formats and date config
+    {
+      provide: NZ_DATE_CONFIG,
+      useValue: {
+        displayFormats: {
+          dateInput: 'yyyy/MM/dd',        // note date-fns casing
+          dateTimeInput: 'yyyy-MM-dd HH:mm:ss',
+          shortWeekLabel: 'EEEEE',
+          veryShortWeekLabel: 'EEEEEE',
+        },
+      },
+    },
+  ],
+};
+```
+
+You can now use `ng-zorro-antd` date components as usual; the Jalali calendar and formatting will apply automatically.
+
+---
+
+### Date & i18n Configuration
+
+- `NZ_DATE_CONFIG`:
+    - `firstDayOfWeek`: sets the first day of the week (0–6)
+    - `displayFormats`: a set of display formats such as `dateInput`, `dateTimeInput`, `monthYearLabel`, etc.
+- `NZ_DATE_LOCALE`: sets the locale for the date library (use `faIR` for `date-fns`)
+- `provideNzI18n(fa_IR)`: enables Persian translations for Zorro components
+- `LOCALE_ID = 'fa'`: enables Persian date/number formatting across Angular
+
+Internal defaults (excerpt):
+
+```json
+{
+  "displayFormats": {
+    "dateInput": "yyyy-MM-dd",
+    "dateTimeInput": "yyyy-MM-dd HH:mm:ss",
+    "dayLabel": "dd",
+    "weekLabel": "ddd",
+    "monthLabel": "MMM",
+    "yearLabel": "yyyy",
+    "weekYearLabel": "yyyy-ww",
+    "quarterLabel": "yyyy-[Q]Q",
+    "monthYearLabel": "yyyy-MM",
+    "shortWeekLabel": "EEEEE",
+    "veryShortWeekLabel": "EEEEEE"
+  }
+}
+```
+
+---
+
+### Usage Examples
+
+#### 1) Single DatePicker
+```html
+<nz-date-picker [(ngModel)]="value" nzFormat="yyyy/MM/dd"></nz-date-picker>
+```
+
+#### 2) RangePicker
+```html
+<nz-range-picker [(ngModel)]="range" nzFormat="yyyy/MM/dd"></nz-range-picker>
+```
+
+#### 3) Calendar
+```html
+<nz-calendar [(ngModel)]="selectedDate"></nz-calendar>
+```
+
+#### 4) Reactive Forms
+```ts
+form = this.fb.group({
+  dob: [null],
+});
+```
+```html
+<form [formGroup]="form">
+  <nz-date-picker formControlName="dob" nzFormat="yyyy/MM/dd"></nz-date-picker>
+</form>
+```
+
+#### 5) Disabling Dates
+```ts
+isDisabled = (d: Date) => {
+  // Example: disable Fridays
+  return d.getDay() === 5;
+};
+```
+```html
+<nz-date-picker [nzDisabledDate]="isDisabled"></nz-date-picker>
+```
+
+---
+
+### API & Tokens
+
+- `NzDateAdapter` (Abstract): abstraction for date operations. Default: `DateFnsDateAdapter`.
+- `NZ_DATE_CONFIG: InjectionToken<NzDateConfig>`: date configuration and display formats.
+- `NZ_DATE_LOCALE: InjectionToken<any>`: locale for the date library (use `faIR` for `date-fns`).
+- `fa_IR`: Persian i18n configuration for `ng-zorro-antd`.
+
+In short, by providing these tokens in your `providers`, all Zorro date controls become consistent and Jalali-enabled.
+
+---
+
+### Tips & Common Pitfalls
+
+- `date-fns` pattern casing matters: `yyyy` = year, `MM` = month, `dd` = day of month. Do not use `DD` (that’s a moment.js pattern).
+- If you don’t set `fa_IR`, component labels may remain in English.
+- For a custom adapter (e.g., `jalali-moment`), ensure you correctly provide the adapter class to `NzDateAdapter`.
+- When using SSR, call `registerLocaleData(fa)` only in the browser or add appropriate guards.
+
+---
+
+### Development & Contribution
+
+- Built and developed with Nx. Project structure:
+    - Library: `libs/ng-zorro-jalali`
+    - Playground app: `apps/playground`
+- Contributions are welcome! Please open an Issue or submit a Pull Request for improvements to the API or docs.
+
+Common commands (may vary based on your workspace setup):
+
+```bash
+# Build the library
+npx nx build ng-zorro-jalali
+
+# Serve the playground (if configured)
 npx nx serve playground
 ```
 
-To create a production bundle:
+---
 
-```sh
-npx nx build playground
-```
+### Changelog
 
-To see all available targets to run for a project, run:
+Track changes via Releases or Git log.
 
-```sh
-npx nx show project playground
-```
+---
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### License
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+MIT
