@@ -1,0 +1,22 @@
+{
+  "name": "ng-zorro-jalali",
+  "version": "0.0.1",
+  "description": "A library that adds Jalali (Persian) calendar support to ng-zorro-antd date components in Angular apps",
+  "author": {
+    "name": "Mahdi Saeidi",
+    "email": "saeidi.dev@gmail.com",
+    "url": "https://github.com/saeidi-dev"
+  },
+  "homepage": "https://github.com/saeidi-dev/ng-zorro-jalali#readme",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/forms": "^20.3.0",
+    "@angular/common": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/cdk": "^20.2.13",
+    "ng-zorro-antd": "^20.4.1",
+    "rxjs": "~7.8.0",
+    "date-fns": "2.30.0"
+  },
+  "sideEffects": false
+}
