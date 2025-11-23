@@ -1,12 +1,16 @@
 .demo-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 24px;
   padding: 24px;
 }
 
 .demo-card {
+  flex: 1 1 calc(50% - 12px);
+  min-width: 300px;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 
   ::ng-deep {
     .ant-card-head-title {
@@ -15,8 +19,13 @@
     }
     .ant-card-body {
       padding: 20px;
+      flex: 1;
     }
   }
+}
+
+.demo-card.calendar-card {
+  flex: 1 1 100%;
 }
 
 .demo-desc {
@@ -24,10 +33,22 @@
   color: #6b6b6b;
 }
 
-nz-date-picker {
+nz-date-picker,
+nz-range-picker,
+nz-select,
+nz-radio-group {
   margin: 0 8px 12px 0;
+  width: 100%;
 }
 
-nz-range-picker {
-  margin: 0 8px 12px 0;
+@media (max-width: 768px) {
+  .demo-card {
+    flex: 1 1 100%;
+  }
+
+  nz-calendar,
+  nz-date-picker[nzInline],
+  nz-range-picker[nzInline] {
+    width: 100%;
+  }
 }
