@@ -1,6 +1,6 @@
 {
   "name": "ng-zorro-jalali",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library that adds Jalali (Persian) calendar support to ng-zorro-antd date components in Angular apps",
   "author": {
     "name": "Mahdi Saeidi",
