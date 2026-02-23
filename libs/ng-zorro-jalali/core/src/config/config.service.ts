@@ -1,4 +1,4 @@
-/* eslint-disable no-invalid-this */
+ 
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -10,7 +10,7 @@ const isDefined = function (value?: NzSafeAny): boolean {
  * This decorator is used to decorate properties. If a property is decorated, it would try to load default value from
  * config.
  */
-// eslint-disable-next-line
+ 
 export function WithConfig<T>() {
   return function ConfigDecorator(
     target: NzSafeAny,

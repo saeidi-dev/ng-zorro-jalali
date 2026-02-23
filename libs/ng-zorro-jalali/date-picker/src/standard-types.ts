@@ -20,6 +20,13 @@ export type DisabledTimeFn = (
   partial?: DisabledTimePartial
 ) => DisabledTimeConfig | undefined;
 
+export type NzPanelChangeType =
+  | { mode: NzDateMode; date: Date }
+  | {
+  mode: [startMode: NzDateMode, endMode: NzDateMode];
+  date: [startDate: Date, endDate: Date];
+};
+
 export interface DisabledTimeConfig {
   nzDisabledHours(): number[];
   nzDisabledMinutes(hour: number): number[];

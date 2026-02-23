@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideNzI18n,
 } from 'ng-zorro-antd/i18n';
@@ -23,7 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideAnimations(),
     provideNzI18n(fa_IR),
     { provide: LOCALE_ID, useValue: 'fa' },
     { provide: NZ_DATE_LOCALE, useValue: faIR },

@@ -10,13 +10,13 @@
   "homepage": "https://github.com/saeidi-dev/ng-zorro-jalali#readme",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/forms": "^20.3.0",
-    "@angular/common": "^20.3.0",
-    "@angular/core": "^20.3.0",
-    "@angular/cdk": "^20.2.13",
-    "ng-zorro-antd": "^20.4.1",
-    "rxjs": "~7.8.0",
-    "date-fns": "2.30.0"
+    "@angular/core": "21.1.5",
+    "@angular/forms": "21.1.5",
+    "ng-zorro-antd": "21.1.0",
+    "@angular/cdk": "21.1.5",
+    "date-fns": "2.30.0",
+    "@angular/common": "21.1.5",
+    "rxjs": "~7.8.0"
   },
   "sideEffects": false
 }

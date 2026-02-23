@@ -10,10 +10,10 @@ import {
   DisabledTimeFn,
   DisabledTimePartial,
   NzDatePickerSizeType,
-  NzPlacement,
 } from 'ng-zorro-antd/date-picker';
 import { NzCalendarMode, NzCalendarModule } from 'ng-zorro-jalali/calendar';
 import { NzDatePickerModule } from 'ng-zorro-jalali/date-picker';
+import { NzPlacement } from 'ng-zorro-antd/core/types';
 
 @Component({
   imports: [

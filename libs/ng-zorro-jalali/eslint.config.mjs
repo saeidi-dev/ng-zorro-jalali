@@ -22,13 +22,6 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'nz',
-        },
-      ],
       '@angular-eslint/component-selector': [
         'error',
         {
@@ -37,6 +30,7 @@ export default [
           style: 'kebab-case',
         },
       ],
+      '@angular-eslint/directive-selector': 'off',
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
