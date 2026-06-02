@@ -140,7 +140,6 @@
 
     <nz-date-picker
       nzShowTime
-      nzFormat="yyyy-MM-DD HH:mm:ss"
       ngModel
       (ngModelChange)="onChange($event)"
       (nzOnOk)="onOk($event)"
@@ -148,7 +147,6 @@
     <br />
     <nz-range-picker
       [nzShowTime]="{ nzFormat: 'HH:mm' }"
-      nzFormat="yyyy-MM-DD HH:mm"
       ngModel
       (ngModelChange)="onChange($event)"
       (nzOnCalendarChange)="onCalendarChange($event)"
@@ -175,7 +173,6 @@
     </p>
 
     <nz-date-picker
-      nzFormat="yyyy-MM-dd HH:mm:ss"
       [nzDisabledDate]="disabledDate"
       [nzDisabledTime]="disabledDateTime"
       [nzShowTime]="{ nzDefaultOpenValue: timeDefaultValue }"
@@ -203,7 +200,6 @@
         nzHideDisabledOptions: true,
         nzDefaultOpenValue: timeDefaultValue
       }"
-      nzFormat="yyyy-MM-DD HH:mm:ss"
     ></nz-range-picker>
   </nz-card>
 

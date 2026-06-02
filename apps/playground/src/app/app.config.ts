@@ -31,8 +31,8 @@ export const appConfig: ApplicationConfig = {
       useValue: {
         displayFormats: {
           veryShortWeekLabel: 'dd',
-          dateInput: 'yyyy/MM/DD',
-          dateTimeInput: 'yyyy-MM-DD HH:mm:ss',
+          dateInput: 'jYYYY/jMM/jDD',
+          dateTimeInput: 'jYYYY/jMM/jDD HH:mm:ss',
         },
       },
     },

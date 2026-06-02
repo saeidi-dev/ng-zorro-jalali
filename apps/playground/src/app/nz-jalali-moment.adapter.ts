@@ -152,6 +152,6 @@ export class JalaliMomentDateAdapter extends NzDateAdapter<Moment> {
     formatStr: string,
     options: { locale: Locale; weekStartsOn: number } | undefined
   ): Moment {
-    return moment(text, formatStr, options?.locale.toString());
+    return moment(text, formatStr, 'fa', true);
   }
 }

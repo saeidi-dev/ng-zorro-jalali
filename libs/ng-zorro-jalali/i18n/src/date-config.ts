@@ -36,8 +36,8 @@ export const NZ_DATE_CONFIG = new InjectionToken<NzDateConfig>(
 export const NZ_DATE_CONFIG_DEFAULT: NzDateConfig = {
   firstDayOfWeek: undefined,
   displayFormats: {
-    dateInput: 'yyyy-MM-dd',
-    dateTimeInput: 'yyyy-MM-dd HH:mm:ss',
+    dateInput: 'jYYYY/jMM/jDD',
+    dateTimeInput: 'jYYYY/jMM/jDD HH:mm:ss',
     dayLabel: 'dd',
     weekLabel: 'ddd',
     monthLabel: 'MMM',
