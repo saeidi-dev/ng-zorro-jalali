@@ -45,7 +45,7 @@ export default {
       yearSelect: 'یک سال را انتخاب کنید',
       decadeSelect: 'یک دهه را انتخاب کنید',
       yearFormat: 'YYYY',
-      dateFormat: 'M/D/YYYY',
+      dateFormat: 'YYYY/MM/DD',
       dayFormat: 'D',
       dateTimeFormat: 'M/D/YYYY HH:mm:ss',
       monthBeforeYear: true,
