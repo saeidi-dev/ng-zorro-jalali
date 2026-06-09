@@ -15,7 +15,6 @@ import { valueFunctionProp } from 'ng-zorro-antd/core/util';
 
 import { AbstractTable } from './abstract-table';
 import { DateBodyRow, DateCell } from './interface';
-import { transCompatFormat } from './util';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -61,7 +60,9 @@ export class DateTableComponent extends AbstractTable implements OnChanges, OnIn
   }
 
   private getVeryShortWeekFormat(): string {
-    return this.i18n.getLocaleId().toLowerCase().indexOf('zh') === 0 ? 'EEEEE' : 'dd'; // Use extreme short for chinese
+    const isCalendar = this.prefixCls.includes('calendar');
+    const format = !isCalendar ? 'dd' : 'dddd'
+    return this.i18n.getLocaleId().toLowerCase().indexOf('zh') === 0 ? 'EEEEE' : format; // Use extreme short for chinese
   }
 
   makeBodyRows(): DateBodyRow[] {
